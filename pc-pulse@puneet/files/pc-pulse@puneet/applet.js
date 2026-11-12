@@ -69,7 +69,7 @@ const SETTING_KEYS = [
     "refresh_ms", "smooth_samples", "custom_every", "left_click", "middle_click",
     "custom_click_cmd", "menu_details", "menu_toggles", "claude_file",
     "claude_stale_hours", "claude_show_reset", "stats_cmd",
-    "weather_units", "weather_every", "weather_caption", "drag_reorder", "logi_enabled", "logi_every",
+    "weather_units", "weather_every", "weather_caption", "drag_reorder", "logi_enabled", "logi_every", "strip_height", "v_offset",
 ];
 
 const BATTERY_LEVELS = { Full: 100, High: 80, Normal: 55, Low: 20, Critical: 5 };
@@ -259,6 +259,11 @@ class PcPulse extends Applet.Applet {
                 if (this.shadow_on) style += "box-shadow: inset 0 1px 0 rgba(255,255,255,0.30);";
             }
             this._pill.set_style(style);
+            // Fixed height, centred in the panel with equal space above and below.
+            let h = this.strip_height > 0 ? this.strip_height : Math.max(16, (this._panelHeight || 40) - 8);
+            this._pill.set_height(Math.min(h, this._panelHeight || h));
+            this._pill.translation_y = this.v_offset || 0;
+            this.actor.set_style("padding: 0 3px;");
 
             this._capStyle = this._textStyle(this.caption_size, cssColor(parseColor(this.caption_color)));
             this._valStyle = this._textStyle(this.value_size, cssColor(parseColor(this.value_color))) +
@@ -1092,6 +1097,10 @@ class PcPulse extends Applet.Applet {
 
     on_applet_middle_clicked() {
         if (this.middle_click !== "none") this._run(this.middle_click);
+    }
+
+    on_panel_height_changed() {
+        this._queueRebuild();
     }
 
     on_applet_removed_from_panel() {

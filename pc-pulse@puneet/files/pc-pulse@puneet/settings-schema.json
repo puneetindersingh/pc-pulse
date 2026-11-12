@@ -67,6 +67,8 @@
       "type": "section",
       "title": "Shape and spacing",
       "keys": [
+        "strip_height",
+        "v_offset",
         "radius",
         "pad_x",
         "pad_y",
@@ -446,6 +448,24 @@
     "default": true,
     "description": "Top highlight line"
   },
+  "strip_height": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 120,
+    "step": 1,
+    "units": "px",
+    "description": "Strip height (0 = panel height minus 8 px)"
+  },
+  "v_offset": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": -10,
+    "max": 10,
+    "step": 1,
+    "units": "px",
+    "description": "Vertical nudge (negative = up)"
+  },
   "radius": {
     "type": "spinbutton",
     "default": 15,
@@ -466,7 +486,7 @@
   },
   "pad_y": {
     "type": "spinbutton",
-    "default": 2,
+    "default": 0,
     "min": 0,
     "max": 10,
     "step": 1,
@@ -560,7 +580,7 @@
   },
   "caption_size": {
     "type": "spinbutton",
-    "default": 7.5,
+    "default": 7,
     "min": 5,
     "max": 14,
     "step": 0.5,
@@ -574,7 +594,7 @@
   },
   "value_size": {
     "type": "spinbutton",
-    "default": 10.5,
+    "default": 10,
     "min": 6,
     "max": 20,
     "step": 0.5,
